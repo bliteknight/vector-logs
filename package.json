@@ -1,0 +1,65 @@
+{
+  "name": "vector-logs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "rimraf ./dist && tsc && npm run eslint",
+    "watch": "npm run build && npm run post-watch ",
+    "watch-ts": "tsc -w --preserveWatchOutput",
+    "watch-node": "nodemon dist/server.js",
+    "start": "node dist/server.js",
+    "eslint": "eslint src/**",
+    "post-watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript, Node\" -c \"yellow, blue\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bliteknight/vector-logs.git"
+  },
+  "keywords": [],
+  "author": "Dee Adesanwo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bliteknight/vector-logs/issues"
+  },
+  "homepage": "https://github.com/bliteknight/vector-logs#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.27",
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
+    "concurrently": "^5.3.0",
+    "ts-node": "9.1.1",
+    "typescript": "4.1.5",
+    "nodemon": "2.0.7",
+    "rimraf": "3.0.2"
+  },
+  "dependencies": {
+    "dotenv": "8.2.0",
+    "ejs": "2.7.1",
+    "eslint": "^7.20.0",
+    "express": "4.17.1"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module"
+    },
+    "extends": [
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/no-explicit-any": "off"
+    }
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "storage/",
+      "tmp/"
+    ]
+  }
+}
